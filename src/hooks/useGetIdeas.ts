@@ -18,6 +18,20 @@ export const useGetIdeas = () => {
   };
   useEffect(() => {
     fetchData();
+
+    const channels = supabase
+      .channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'ideas' },
+        (payload) => {
+          console.log('Change received!', payload);
+        }
+      )
+      .subscribe();
+    return () => {
+      channels.unsubscribe();
+    };
   }, []);
 
   const addIdea = async (idea: { idea: string; userId: string }) => {
