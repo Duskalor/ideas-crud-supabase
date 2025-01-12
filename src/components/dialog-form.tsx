@@ -11,12 +11,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/context/authcontex';
-import { useGetIdeas } from '@/hooks/useGetIdeas';
+import { addIdea } from '@/lib/actionsDB';
 import { useState } from 'react';
 
 export function DialogForm() {
   const [open, setopen] = useState(false);
-  const { addIdea } = useGetIdeas();
+
   const { session } = useAuth();
   const [error, setError] = useState<string | null>(null);
 
@@ -41,34 +41,20 @@ export function DialogForm() {
         <Button variant='outline'>New Idea</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete='off'>
           <DialogHeader>
             <DialogTitle>Create a new idea</DialogTitle>
             <DialogDescription>
-              This is a description of the dialog. You can put anything you want
+              here you can write your idea and save it to the database for later
+              use and share it with your friends.
             </DialogDescription>
           </DialogHeader>
           <div className='grid gap-4 py-4'>
-            {/* <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='name' className='text-right'>
-                Name
-              </Label>
-              <Input
-                id='name'
-                // defaultValue='Pedro Duarte'
-                className='col-span-3'
-              />
-            </div> */}
             <div className='grid grid-cols-4 items-center gap-4'>
               <Label htmlFor='username' className='text-right'>
                 New Idea
               </Label>
-              <Input
-                id='username'
-                name='idea'
-                // defaultValue='@peduarte'
-                className='col-span-3'
-              />
+              <Input id='username' name='idea' className='col-span-3' />
             </div>
           </div>
           {error && <p className='text-red-500 mb-2'>{error}</p>}
