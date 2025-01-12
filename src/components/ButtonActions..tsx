@@ -1,4 +1,5 @@
 import { deleteIdea } from '@/lib/actionsDB';
+import { DeleteDialog } from './deleteDialog';
 
 interface ButtonProps {
   row: { original: { id: string } };
@@ -12,26 +13,20 @@ export const ButtonActions = ({ row }: ButtonProps) => {
   };
 
   return (
-    <>
+    <section className='flex justify-center gap-5'>
       <button
         className='btn btn-circle btn-text btn-sm'
         aria-label='Action button'
       >
         <span className='icon-[tabler--pencil] size-5'></span>
       </button>
-      <button
-        onClick={handleDelete}
-        className='btn btn-circle btn-text btn-sm'
-        aria-label='Action button'
-      >
-        <span className='icon-[tabler--trash] size-5'></span>
-      </button>
+      <DeleteDialog deleteIdea={handleDelete} />
       <button
         className='btn btn-circle btn-text btn-sm'
         aria-label='Action button'
       >
         <span className='icon-[tabler--dots-vertical] size-5'></span>
       </button>
-    </>
+    </section>
   );
 };

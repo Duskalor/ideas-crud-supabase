@@ -6,7 +6,6 @@ export const UserCell = ({ row }: { row: { original: Idea } }) => {
   const userData = row.original;
   const name = userData.user.full_name;
   const FallbackName = getFallBackName(name);
-
   return (
     <span className='flex gap-5 text-center'>
       <Avatar>
@@ -14,7 +13,8 @@ export const UserCell = ({ row }: { row: { original: Idea } }) => {
         <AvatarFallback>{FallbackName}</AvatarFallback>
       </Avatar>
       <span className='flex items-center text-tableFont'>
-        {name.length > 15 ? name.slice(0, 15) + '...' : name}
+        {/* {name.length > 15 ? name.slice(0, 15) + '...' : name} */}
+        {name}
       </span>
     </span>
   );
