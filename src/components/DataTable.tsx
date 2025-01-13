@@ -4,12 +4,15 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { UserCell } from './UserCell';
 import { CompletedCell } from './CompletedCell';
 import { ButtonActions } from './ButtonActions.';
 import dayjs from 'dayjs';
+import { useState } from 'react';
+import { Input } from './ui/input';
 
 const columns: ColumnDef<Idea>[] = [
   {
@@ -53,13 +56,24 @@ const columns: ColumnDef<Idea>[] = [
 
 export const DataTable = () => {
   const { ideas } = useGetIdeas();
+  const [filtered, setfiltered] = useState('');
   const table = useReactTable({
     data: ideas,
     columns,
+    state: {
+      globalFilter: filtered,
+    },
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setfiltered,
   });
   return (
     <div className='p-5 w-full overflow-x-auto'>
+      <Input
+        placeholder='Search'
+        value={filtered}
+        onChange={(e) => setfiltered(e.target.value)}
+      />
       <table className='table mx-auto' style={{ width: table.getTotalSize() }}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

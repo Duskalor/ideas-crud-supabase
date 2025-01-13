@@ -26,7 +26,8 @@ export function DeleteDialog({ deleteIdea }: { deleteIdea: () => void }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your idea
+            This action cannot be undone. This will permanently delete your
+            <strong> idea </strong>
             and remove your data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>

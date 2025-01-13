@@ -1,4 +1,7 @@
 export const getFallBackName = (name: string) => {
+  if (!name) {
+    return 'NN';
+  }
   const FallbackName = name
     .split(' ')
     .slice(0, 2)
